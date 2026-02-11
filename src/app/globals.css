@@ -1,26 +1,139 @@
 @import "tailwindcss";
 
 :root {
+  /* Theme tokens (change these only to re-theme the UI) */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #111827; /* slate-900 */
+
+  --primary: #0e67ab; /* brand red */
+  --primary-foreground: #ffffff;
+
+  --secondary: #0f172a; /* slate-900-ish */
+  --secondary-foreground: #ffffff;
+
+  --accent: #f59e0b; /* amber-500 (ratings/highlights) */
+  --accent-foreground: #111827;
+
+  --muted: #f3f4f6; /* gray-100 */
+  --muted-foreground: #6b7280; /* gray-500 */
+
+  --border: rgba(17, 24, 39, 0.12);
+  --ring: rgba(219, 68, 68, 0.35);
+}
+
+:root[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #111827; /* slate-900 */
+
+  --primary: #0e67ab; /* brand red */
+  --primary-foreground: #ffffff;
+
+  --secondary: #0f172a; /* slate-900-ish */
+  --secondary-foreground: #ffffff;
+
+  --accent: #f59e0b; /* amber-500 (ratings/highlights) */
+  --accent-foreground: #111827;
+
+  --muted: #f3f4f6; /* gray-100 */
+  --muted-foreground: #6b7280; /* gray-500 */
+
+  --border: rgba(17, 24, 39, 0.12);
+  --ring: rgba(219, 68, 68, 0.35);
+}
+
+:root[data-theme="dark"] {
+  --background: #0b1220;
+  --foreground: #e5e7eb;
+
+  --secondary: #0b1220;
+  --secondary-foreground: #e5e7eb;
+
+  --muted: rgba(255, 255, 255, 0.06);
+  --muted-foreground: rgba(229, 231, 235, 0.7);
+
+  --border: rgba(229, 231, 235, 0.14);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-cairo);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme]) {
+    --background: #0b1220;
+    --foreground: #e5e7eb;
+
+    --secondary: #0b1220;
+    --secondary-foreground: #e5e7eb;
+
+    --muted: rgba(255, 255, 255, 0.06);
+    --muted-foreground: rgba(229, 231, 235, 0.7);
+
+    --border: rgba(229, 231, 235, 0.14);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+:root[data-theme="dark"] .invert-dark {
+  filter: invert(1);
+}
+
+:root[data-theme="light"] .invert-light {
+  filter: invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .invert-dark {
+    filter: invert(1);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .invert-light {
+    filter: invert(1);
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+.animate-x {
+  transform-origin: 50% 50%;
+  animation: loading-x 1.8s ease-in-out infinite;
+  scale: 2;
+  transition: scale 0.7s linear;
+}
+.hide-lape {
+  height: 0;
+  opacity: 0;
+  transition: height linear 0.7s, opacity linear 0.5s;
+}
+
+@keyframes loading-x {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

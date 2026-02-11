@@ -1,0 +1,224 @@
+{
+  "app": {
+    "name": "LAPEX"
+  },
+  "nav": {
+    "home": "Home",
+    "contact": "Contact",
+    "about": "About",
+    "login": "Login",
+    "logout": "Log out",
+    "searchPlaceholder": "What are you looking for",
+    "search": "Search",
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode",
+    "switchToEn": "English",
+    "switchToAr": "Arabic"
+  },
+  "common": {
+    "viewAll": "View All",
+    "buyNow": "Buy Now",
+    "shopNow": "Shop Now",
+    "applyCoupon": "Apply Coupon",
+    "couponCode": "Coupon Code",
+    "returnToShop": "Return to shop",
+    "processToCheckout": "Process To Checkout",
+    "placeOrder": "Place Order",
+    "sendMessage": "Send message",
+    "free": "free"
+  },
+  "home": {
+    "todays": "Today's",
+    "flashSales": "Flash sales",
+    "categories": "Categories",
+    "browseByCategory": "Browse By Category",
+    "brands": "Brands",
+    "browseByBrands": "Browse By Brands",
+    "ourProducts": "Our Products",
+    "exploreOurProducts": "Explore Our Products",
+    "gaming": "Gaming",
+    "exploreGamingLaptops": "Explore Gaming Laptops",
+    "featured": "Featured",
+    "newArrived": "New Arrived",
+    "mac": {
+      "label": "MacBook",
+      "title": "MacOS, Quick to learn, easy to love!"
+    },
+    "advantages": {
+      "compReview": "Comprehensive Reviews",
+      "compReviewText": "Detailed specs and performance scores for every laptop",
+      "priceComparison": "Live Price Comparison",
+      "priceComparisonText": "Compare prices across the top Syrian stores",
+      "unbiasedInfo": "Unbiased Information",
+      "unbiasedInfoText": "Independent reviews and expert recommendations"
+    }
+  },
+  "categories": {
+    "phones": "Phones",
+    "computers": "Computers",
+    "smartWatch": "SmartWatch",
+    "camera": "Camera",
+    "headPhones": "Headphones",
+    "gaming": "Gaming"
+  },
+  "about": {
+    "title": "Our Story",
+    "p1": "Launched in 2026, LAPEX is Syria's premier laptop comparison and review platform. We help customers make informed decisions by aggregating laptop listings from major Syrian retailers, providing detailed specifications, performance scores, and expert reviews all in one place.",
+    "p2": "LAPEX features laptops from the best Syrian stores and international brands, with comprehensive comparisons across gaming, office work, programming, and video editing use cases. Our mission is to simplify laptop shopping by providing transparent, unbiased information.",
+    "stats": {
+      "stores": "Partnered stores",
+      "visitors": "Monthly active users",
+      "laptops": "Laptops in database"
+    },
+    "statsValues": {
+      "stores": "50+",
+      "visitors": "45.5K",
+      "laptops": "2.5K+"
+    }
+  },
+  "contact": {
+    "callUs": "Call Us",
+    "callUsText": "We're available 24 hours a day, 7 days a week!",
+    "writeToUs": "Write To Us",
+    "writeToUsText": "Fill out our form and we will contact you within 24 hours",
+    "orSendEmail": "Or send us an email:",
+    "form": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "phone": "Your Phone",
+      "message": "Your Message"
+    }
+  },
+  "checkout": {
+    "billingDetails": "Billing Details",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "streetAddress": "Street Address",
+    "apartment": "Apartment, Floor, etc (optional)",
+    "city": "City/Town",
+    "phoneNumber": "Phone Number",
+    "emailAddress": "Email Address",
+    "saveInfo": "Save this information for faster check-out next time",
+    "bank": "Bank",
+    "cashOnDelivery": "Cash on delivery"
+  },
+  "favorite": {
+    "title": "Favorite ({count})",
+    "relative": "Relative",
+    "justForYou": "Just for you"
+  },
+  "auth": {
+    "loginTitle": "Log in to LAPEX",
+    "signupTitle": "Create an account",
+    "enterDetails": "Enter your details below",
+    "emailOrUsername": "Email or Username",
+    "password": "Password",
+    "username": "Username",
+    "email": "Email",
+    "confirmPassword": "Confirm Password",
+    "login": "Log in",
+    "createAccount": "Create Account",
+    "googleSignup": "Sign up with Google",
+    "dontHaveAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "signup": "Sign up"
+  },
+  "productDetails": {
+    "color": "Color:",
+    "size": "Size:",
+    "freeDelivery": "Free delivery",
+    "freeDeliveryText": "Enter your postal code for free delivery",
+    "returnDelivery": "Return delivery",
+    "returnDeliveryText": "Free 30 days delivery return",
+    "specifications": "Specifications",
+    "usageScores": "Usage Scores",
+    "outOfStock": "Out of Stock",
+    "viewOnSource": "View on Source",
+    "compareLaptop": "Compare Laptop"
+  },
+  "specs": {
+    "cpu": "CPU",
+    "gpu": "GPU",
+    "ram": "RAM",
+    "storage": "Storage",
+    "screen": "Screen",
+    "os": "Operating System",
+    "weight": "Weight"
+  },
+  "scores": {
+    "office": "Office Work",
+    "gaming": "Gaming",
+    "editing": "Video Editing",
+    "programming": "Programming"
+  },
+  "footer": {
+    "subscribe": "Subscribe",
+    "subscribeText": "Get 10% off your first order",
+    "enterEmail": "Enter your email",
+    "account": "Account",
+    "myAccount": "My Account",
+    "favorite": "Favorite",
+    "shop": "Shop",
+    "developedBy": "Developed By",
+    "github": "My Github",
+    "quickLink": "Quick Link",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "Terms Of Use",
+    "faq": "FAQ"
+  },
+  "notFound": {
+    "title": "404 The page is not found",
+    "backHome": "Back To Home page"
+  },
+  "timer": {
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
+  },
+  "a11y": {
+    "addToFavorite": "Add to favorite",
+    "removeFromFavorite": "Remove from favorite",
+    "favorite": "Favorite",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "openSearch": "Open search",
+    "closeSearch": "Close search",
+    "toggleLanguage": "Change language",
+    "scrollLeft": "Scroll left",
+    "scrollRight": "Scroll right",
+    "authSideImageAlt": "Store illustration",
+    "aboutSideImageAlt": "About illustration",
+    "offerImageAlt": "Offer image",
+    "selectProductImage": "Select product image {index}",
+    "rating": "Rating: {value} out of 5"
+  },
+  "validation": {
+    "username": "Username must be 3-16 characters long and can only contain letters, numbers, periods, underscores, and hyphens.",
+    "email": "Please enter a valid email address.",
+    "password": "Password must be at least 8 characters long and contain both letters and numbers.",
+    "confirmPassword": "Passwords do not match."
+  },
+  "search": {
+    "title": "Search Results",
+    "loading": "Loading...",
+    "laptopsFound": "{count} laptops found",
+    "noResults": "No laptops found matching your criteria",
+    "error": "Failed to load laptops",
+    "brandLaptops": "{brand} Laptops",
+    "categoryResults": "Category Results",
+    "searchResults": "Search results for \"{query}\"",
+    "searching": "Searching",
+    "viewAllResults": "View all results",
+    "clearSearch": "Clear search",
+    "filters": "Filters",
+    "brand": "Brand",
+    "category": "Category",
+    "minPrice": "Min Price",
+    "maxPrice": "Max Price",
+    "allBrands": "All Brands",
+    "allCategories": "All Categories",
+    "applyFilters": "Apply Filters",
+    "clearFilters": "Clear Filters"
+  }
+}

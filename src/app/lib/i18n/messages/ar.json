@@ -1,0 +1,224 @@
+{
+  "app": {
+    "name": "لابيكس"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "contact": "تواصل معنا",
+    "about": "من نحن",
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "searchPlaceholder": "عمّ تبحث؟",
+    "search": "بحث",
+    "darkMode": "الوضع الداكن",
+    "lightMode": "الوضع الفاتح",
+    "switchToEn": "English",
+    "switchToAr": "العربية"
+  },
+  "common": {
+    "viewAll": "عرض الكل",
+    "buyNow": "اشترِ الآن",
+    "shopNow": "تسوّق الآن",
+    "applyCoupon": "تطبيق القسيمة",
+    "couponCode": "كود القسيمة",
+    "returnToShop": "العودة للتسوق",
+    "processToCheckout": "إتمام الشراء",
+    "placeOrder": "تأكيد الطلب",
+    "sendMessage": "إرسال الرسالة",
+    "free": "مجاني"
+  },
+  "home": {
+    "todays": "اليوم",
+    "flashSales": "عروض خاطفة",
+    "categories": "التصنيفات",
+    "browseByCategory": "تصفح حسب التصنيف",
+    "brands": "الشركات",
+    "browseByBrands": "تصفح حسب الشركة",
+    "ourProducts": "منتجاتنا",
+    "exploreOurProducts": "استكشف منتجاتنا",
+    "gaming": "الألعاب",
+    "exploreGamingLaptops": "استكشف لابتوبات الألعاب",
+    "featured": "مميّز",
+    "newArrived": "وصل حديثًا",
+    "mac": {
+      "label": "ماك بوك",
+      "title": "MacOS, تألفه بسرعة، تعشقه بلحظة!"
+    },
+    "advantages": {
+      "compReview": "مراجعات شاملة",
+      "compReviewText": "مواصفات تفصيلية ونقاط أداء لكل جهاز لابتوب",
+      "priceComparison": "مقارنة أسعار مباشرة",
+      "priceComparisonText": "قارن الأسعار عبر أشهر المتاجر السورية",
+      "unbiasedInfo": "معلومات محايدة",
+      "unbiasedInfoText": "مراجعات مستقلة وتوصيات من خبراء"
+    }
+  },
+  "categories": {
+    "phones": "هواتف",
+    "computers": "حواسيب",
+    "smartWatch": "ساعات ذكية",
+    "camera": "كاميرات",
+    "headPhones": "سماعات",
+    "gaming": "ألعاب"
+  },
+  "about": {
+    "title": "قصتنا",
+    "p1": "انطلقت لابيكس في عام 2026 كأول منصة سورية متخصصة في مقارنة ومراجعة اللابتوبات. نساعد العملاء على اتخاذ قرارات مستنيرة من خلال تجميع عروض اللابتوبات من كبرى المتاجر السورية، وتوفير المواصفات التفصيلية ونقاط الأداء والمراجعات الاحترافية في مكان واحد.",
+    "p2": "تعرض لابيكس أجهزة لابتوب من أشهر المتاجر السورية وعلامات تجارية عالمية، مع مقارنات شاملة للألعاب والعمل المكتبي والبرمجة وتحرير الفيديو. مهمتنا تبسيط عملية شراء اللابتوب من خلال توفير معلومات شفافة ومحايدة.",
+    "stats": {
+      "stores": "متاجر شريكة",
+      "visitors": "مستخدم نشط شهريًا",
+      "laptops": "جهاز في قاعدة البيانات"
+    },
+    "statsValues": {
+      "stores": "+50",
+      "visitors": "45.5K",
+      "laptops": "+2.5K"
+    }
+  },
+  "contact": {
+    "callUs": "اتصل بنا",
+    "callUsText": "نحن متاحون 24 ساعة يوميًا، 7 أيام في الأسبوع!",
+    "writeToUs": "راسلنا",
+    "writeToUsText": "املأ النموذج وسنتواصل معك خلال 24 ساعة",
+    "orSendEmail": "أو راسلنا عبر البريد الإلكتروني:",
+    "form": {
+      "name": "اسمك",
+      "email": "بريدك الإلكتروني",
+      "phone": "رقم هاتفك",
+      "message": "رسالتك"
+    }
+  },
+  "checkout": {
+    "billingDetails": "تفاصيل الفوترة",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "streetAddress": "العنوان",
+    "apartment": "الشقة، الطابق، إلخ (اختياري)",
+    "city": "المدينة/البلدة",
+    "phoneNumber": "رقم الهاتف",
+    "emailAddress": "البريد الإلكتروني",
+    "saveInfo": "احفظ هذه المعلومات لتسريع عملية الدفع في المرة القادمة",
+    "bank": "تحويل بنكي",
+    "cashOnDelivery": "الدفع عند الاستلام"
+  },
+  "favorite": {
+    "title": "المفضلة ({count})",
+    "relative": "مشابه",
+    "justForYou": "مقترحات لك"
+  },
+  "auth": {
+    "loginTitle": "سجّل الدخول إلى لابيكس",
+    "signupTitle": "إنشاء حساب",
+    "enterDetails": "أدخل بياناتك بالأسفل",
+    "emailOrUsername": "البريد الإلكتروني أو اسم المستخدم",
+    "password": "كلمة المرور",
+    "username": "اسم المستخدم",
+    "email": "البريد الإلكتروني",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "login": "تسجيل الدخول",
+    "createAccount": "إنشاء حساب",
+    "googleSignup": "التسجيل عبر Google",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "signup": "إنشاء حساب"
+  },
+  "productDetails": {
+    "color": "اللون:",
+    "size": "المقاس:",
+    "freeDelivery": "توصيل مجاني",
+    "freeDeliveryText": "أدخل الرمز البريدي للحصول على توصيل مجاني",
+    "returnDelivery": "إرجاع الطلب",
+    "returnDeliveryText": "إرجاع مجاني خلال 30 يومًا",
+    "specifications": "المواصفات",
+    "usageScores": "نقاط الاستخدام",
+    "outOfStock": "غير متوفر",
+    "viewOnSource": "عرض على المصدر",
+    "compareLaptop": "قارن اللابتوب"
+  },
+  "specs": {
+    "cpu": "المعالج",
+    "gpu": "كرت الشاشة",
+    "ram": "الذاكرة العشوائية",
+    "storage": "التخزين",
+    "screen": "الشاشة",
+    "os": "نظام التشغيل",
+    "weight": "الوزن"
+  },
+  "scores": {
+    "office": "العمل المكتبي",
+    "gaming": "الألعاب",
+    "editing": "تحرير الفيديو",
+    "programming": "البرمجة"
+  },
+  "footer": {
+    "subscribe": "اشترك",
+    "subscribeText": "احصل على خصم 10% على أول طلب",
+    "enterEmail": "أدخل بريدك الإلكتروني",
+    "account": "الحساب",
+    "myAccount": "حسابي",
+    "favorite": "المفضلة",
+    "shop": "تسوق",
+    "developedBy": "تم التطوير بواسطة",
+    "github": "حسابي على GitHub",
+    "quickLink": "روابط سريعة",
+    "privacyPolicy": "سياسة الخصوصية",
+    "termsOfUse": "شروط الاستخدام",
+    "faq": "الأسئلة الشائعة"
+  },
+  "notFound": {
+    "title": "404 الصفحة غير موجودة",
+    "backHome": "العودة للصفحة الرئيسية"
+  },
+  "timer": {
+    "days": "أيام",
+    "hours": "ساعات",
+    "minutes": "دقائق",
+    "seconds": "ثوانٍ"
+  },
+  "a11y": {
+    "addToFavorite": "إضافة إلى المفضلة",
+    "removeFromFavorite": "إزالة من المفضلة",
+    "favorite": "المفضلة",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة",
+    "openSearch": "فتح البحث",
+    "closeSearch": "إغلاق البحث",
+    "toggleLanguage": "تغيير اللغة",
+    "scrollLeft": "تمرير لليسار",
+    "scrollRight": "تمرير لليمين",
+    "authSideImageAlt": "صورة توضيحية للمتجر",
+    "aboutSideImageAlt": "صورة توضيحية لصفحة من نحن",
+    "offerImageAlt": "صورة العرض",
+    "selectProductImage": "اختيار صورة المنتج رقم {index}",
+    "rating": "التقييم: {value} من 5"
+  },
+  "validation": {
+    "username": "يجب أن يكون اسم المستخدم بين 3 و16 حرفًا ويحتوي على أحرف وأرقام ونقاط وشرطات سفلية وواصلات فقط.",
+    "email": "يرجى إدخال بريد إلكتروني صالح.",
+    "password": "يجب أن تكون كلمة المرور 8 أحرف على الأقل وتحتوي على أحرف وأرقام.",
+    "confirmPassword": "كلمتا المرور غير متطابقتين."
+  },
+  "search": {
+    "title": "نتائج البحث",
+    "loading": "جاري التحميل...",
+    "laptopsFound": "تم العثور على {count} لابتوب",
+    "noResults": "لم يتم العثور على لابتوبات تطابق معاييرك",
+    "error": "فشل تحميل اللابتوبات",
+    "brandLaptops": "لابتوبات {brand}",
+    "categoryResults": "نتائج الفئة",
+    "searchResults": "نتائج البحث عن \"{query}\"",
+    "searching": "جاري البحث",
+    "viewAllResults": "عرض جميع النتائج",
+    "clearSearch": "??? ?????",
+    "filters": "التصفية",
+    "brand": "العلامة التجارية",
+    "category": "الفئة",
+    "minPrice": "الحد الأدنى للسعر",
+    "maxPrice": "الحد الأقصى للسعر",
+    "allBrands": "جميع العلامات",
+    "allCategories": "جميع الفئات",
+    "applyFilters": "تطبيق التصفية",
+    "clearFilters": "مسح التصفية"
+  }
+}
