@@ -27,7 +27,7 @@ const NAV_LINKS: Array<{ key: string; href: AppRoute }> = [
   { key: "nav.home", href: "/" },
   { key: "nav.contact", href: "/contact" },
   { key: "nav.about", href: "/about" },
-  { key: "nav.login", href: "/login" },
+  // { key: "nav.login", href: "/login" },
 ];
 
 function stripLocale(pathname: string, locale: string): string {
