@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { I18nProvider } from "@/app/components/i18n/I18nProvider";
 import { SiteFooter } from "@/app/components/layout/SiteFooter";
 import { SiteHeader } from "@/app/components/layout/SiteHeader";
@@ -30,7 +31,9 @@ export default async function LocaleLayout({
   return (
     <I18nProvider locale={locale} dict={dict}>
       <div dir={locale === "ar" ? "rtl" : "ltr"} className="min-h-dvh">
-        <RouteTransitionLoader />
+        <Suspense fallback={null}>
+          <RouteTransitionLoader />
+        </Suspense>
         <SiteHeader />
         <main className="mx-auto w-full max-w-[1240px] px-4 py-8">{children}</main>
         <SiteFooter />
