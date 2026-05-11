@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LAPEX
 
-## Getting Started
+LAPEX is Syria's premier laptop comparison and review platform. We simplify laptop shopping by aggregating listings from major Syrian retailers and international brands, providing detailed specifications and performance scores in one place — helping customers make informed decisions.
 
-First, run the development server:
+Built with **Next.js** (App Router), **TypeScript**, and **Supabase**, LAPEX delivers a multilingual, responsive experience with server routes, advanced search and filtering, and reusable UI components for product listings, details, favorites, and side-by-side comparisons.
+
+**Live demo:** https://lapex.vercel.app (deployed on Vercel as the `dev` deployment)
+
+## Key features
+
+- Product search and filtering
+- Product comparison view and score breakdowns
+- Favorites management
+- Multilingual support and locale-aware routing
+- Supabase backend integration (auth + database)
+
+## Tech stack
+
+- Next.js (App Router)
+- TypeScript
+- Supabase (client + server-side integration)
+- TailwindCSS / PostCSS
+
+## Quick start
+
+1. Install dependencies:
+
+```bash
+npm install
+# or
+pnpm install
+```
+
+2. Run development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+For available npm scripts and more, check `package.json`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment & secrets
 
-## Learn More
+This project uses Supabase. Provide the required environment variables before running locally (example names):
 
-To learn more about Next.js, take a look at the following resources:
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+See the Supabase setup notes for details: [docs/SUPABASE_SETUP.md](docs/SUPABASE_SETUP.md) and [SUPABASE_CONNECTION.md](SUPABASE_CONNECTION.md).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project structure (high level)
 
-## Deploy on Vercel
+- [src/app](src/app) — Next.js app routes and pages
+- [src/components](src/components) — UI components grouped by feature
+- [src/lib/supabase](src/lib/supabase) — Supabase client, hooks and queries
+- [src/api](src/api) — server route handlers
+- [src/utils](src/utils) — helper utilities (image, text, favorite)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Explore the source for detailed implementations (for example, see [src/app/[locale]/product/[slug]/page.tsx](src/app/%5Blocale%5D/product/%5Bslug%5D/page.tsx)).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Supabase notes
+
+This repository includes helper docs and connection notes:
+
+- [docs/SUPABASE_SETUP.md](docs/SUPABASE_SETUP.md)
+- [SUPABASE_CONNECTION.md](SUPABASE_CONNECTION.md)
+
+Follow those guides to create a Supabase project and seed any required tables before running the app.
