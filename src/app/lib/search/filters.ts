@@ -4,6 +4,7 @@ export const SEARCH_FILTER_KEYS = [
   "categoryId",
   "minPrice",
   "maxPrice",
+  "compare"
 ] as const;
 
 export type SearchFilterKey = (typeof SEARCH_FILTER_KEYS)[number];

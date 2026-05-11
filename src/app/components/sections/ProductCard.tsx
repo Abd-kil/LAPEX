@@ -10,9 +10,9 @@ import { productDetailsHref } from "@/app/lib/i18n/routing";
 import { addToFavorite, isFavorite, removeFromFavorite } from "@/app/utils/favorite";
 import { useState } from "react";
 
-export function ProductCard({ laptop, refreshFavorite }: { laptop: LaptopWithDetails; refreshFavorite?: ()=>void }) {
+export function ProductCard({ laptop, customLink, refreshFavorite }: { laptop: LaptopWithDetails; customLink?: string; refreshFavorite?: ()=>void }) {
   const { locale, t } = useI18n();
-  const href = productDetailsHref(locale, laptop.id);
+  const href = customLink || productDetailsHref(locale, laptop.id);
   const [isFavoriteState, setIsFavoriteState] = useState(isFavorite(laptop.id));
   const primaryImage = laptop.image_url;
 

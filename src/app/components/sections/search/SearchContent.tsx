@@ -3,17 +3,27 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ProductCard } from "@/app/components/sections/ProductCard";
-import { getLaptops, getCategories } from "@/app/lib/supabase/queries";
+import {
+  getLaptops,
+  getCategories,
+  getLaptopById,
+} from "@/app/lib/supabase/queries";
 import type { Laptop, Category } from "@/app/lib/constants/models";
 import { useI18n } from "@/app/components/i18n/I18nProvider";
 import { HOME_BRANDS } from "@/app/lib/constants/mockCategories";
-import { buildSearchParams, parseSearchFilters } from "@/app/lib/search/filters";
+import {
+  buildSearchParams,
+  parseSearchFilters,
+} from "@/app/lib/search/filters";
 import LoadingLogo from "../../ui/LoadingLogo";
+import ProductCompareCard from "../../ui/ProductCompareCard";
+import { getProductImage } from "@/app/utils/image";
 
 export function SearchContent() {
   const { t, locale } = useI18n();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [comparedLaptop, setComparedLaptop] = useState<Laptop | null>(null);
   const [laptops, setLaptops] = useState<Laptop[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,12 +34,33 @@ export function SearchContent() {
   const PRICE_MAX = 10000;
   const PRICE_STEP = 50;
 
-  const filters = useMemo(() => parseSearchFilters(searchParams), [searchParams]);
+  const compareId = Number(searchParams.get("compare")) || null;
+
+  const filters = useMemo(
+    () => parseSearchFilters(searchParams),
+    [searchParams],
+  );
   const searchQuery = filters.q;
   const brand = filters.brand;
   const categoryId = filters.categoryId;
   const minPrice = filters.minPrice;
   const maxPrice = filters.maxPrice;
+
+  // fetch the compared laptop if compareId is present in query params
+  useEffect(() => {
+    async function fetchComparedLaptop() {
+      if (!compareId) return;
+
+      try {
+        const laptop = await getLaptopById(compareId);
+        setComparedLaptop(laptop);
+      } catch (error) {
+        console.error("Error fetching compared laptop:", error);
+      }
+    }
+
+    fetchComparedLaptop();
+  }, [compareId]);
 
   // Filter states (draft values)
   const [selectedBrand, setSelectedBrand] = useState(brand || "");
@@ -38,11 +69,11 @@ export function SearchContent() {
   const [priceMax, setPriceMax] = useState(maxPrice || "");
   const sliderMin = Math.max(
     PRICE_MIN,
-    Math.min(PRICE_MAX, parseInt(priceMin || `${PRICE_MIN}`, 10))
+    Math.min(PRICE_MAX, parseInt(priceMin || `${PRICE_MIN}`, 10)),
   );
   const sliderMax = Math.max(
     PRICE_MIN,
-    Math.min(PRICE_MAX, parseInt(priceMax || `${PRICE_MAX}`, 10))
+    Math.min(PRICE_MAX, parseInt(priceMax || `${PRICE_MAX}`, 10)),
   );
 
   // Fetch categories on mount
@@ -71,7 +102,9 @@ export function SearchContent() {
         setLoading(true);
         setError(null);
 
-        const parsedCategoryId = categoryId ? parseInt(categoryId, 10) : undefined;
+        const parsedCategoryId = categoryId
+          ? parseInt(categoryId, 10)
+          : undefined;
         const parsedMinPrice = minPrice ? parseFloat(minPrice) : undefined;
         const parsedMaxPrice = maxPrice ? parseFloat(maxPrice) : undefined;
 
@@ -79,12 +112,14 @@ export function SearchContent() {
           isAvailable: true,
           searchQuery,
           brand,
-          categoryId: Number.isNaN(parsedCategoryId) ? undefined : parsedCategoryId,
+          categoryId: Number.isNaN(parsedCategoryId)
+            ? undefined
+            : parsedCategoryId,
           minPrice: Number.isNaN(parsedMinPrice) ? undefined : parsedMinPrice,
           maxPrice: Number.isNaN(parsedMaxPrice) ? undefined : parsedMaxPrice,
         });
 
-        setLaptops(data);
+        setLaptops(data.filter((l) => l.id !== compareId)); // Exclude compared laptop from results
       } catch (err) {
         console.error("Error fetching laptops:", err);
         setError("Failed to load laptops");
@@ -103,6 +138,7 @@ export function SearchContent() {
       categoryId,
       minPrice,
       maxPrice,
+      compare: compareId?.toString() || undefined,
     }).toString();
   }, [searchQuery, brand, categoryId, minPrice, maxPrice]);
 
@@ -116,6 +152,7 @@ export function SearchContent() {
         // Keep applied price values until user clicks Apply.
         minPrice,
         maxPrice,
+        compare: compareId?.toString() || undefined,
       });
       const next = params.toString();
       if (next !== appliedParamsString) {
@@ -143,6 +180,7 @@ export function SearchContent() {
       categoryId: selectedCategory || undefined,
       minPrice: priceMin || undefined,
       maxPrice: priceMax || undefined,
+      compare: compareId?.toString() || undefined,
     });
     const qs = params.toString();
     router.push(`/${locale}/search${qs ? `?${qs}` : ""}`);
@@ -155,7 +193,7 @@ export function SearchContent() {
     setSelectedCategory("");
     setPriceMin("");
     setPriceMax("");
-    const params = buildSearchParams({ q: searchQuery });
+    const params = buildSearchParams({ q: searchQuery, compare: compareId?.toString() || undefined });
     const qs = params.toString();
     router.push(`/${locale}/search${qs ? `?${qs}` : ""}`);
   };
@@ -168,23 +206,40 @@ export function SearchContent() {
     return t("search.title");
   };
 
-  const hasActiveFilters = selectedBrand || selectedCategory || priceMin || priceMax;
+  const hasActiveFilters =
+    selectedBrand || selectedCategory || priceMin || priceMax;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-muted/20 via-background to-background">
       <div className="container mx-auto px-4">
-        <div className="mb-6 rounded-3xl border border-border/60 bg-background/80 p-6 shadow-sm backdrop-blur">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-                {getTitle()}
-              </h1>
-              <p className="mt-2 text-sm text-muted-foreground sm:text-base">
-                {loading
-                  ? t("search.loading")
-                  : t("search.laptopsFound", { count: laptops.length })}
-              </p>
-            </div>
+        <div className="mb-6 mx-auto grid max-w-6xl gap-8 lg:grid-cols-12 lg:gap-6">
+          <div className="flex flex-col gap-4 lg:col-span-8">
+            {comparedLaptop ? (
+              <div className="flex gap-4 items-stretch md:gap-4 lg:gap-6">
+                <div className="min-h-0 min-w-0 flex-1">
+                  <ProductCompareCard
+                    product={comparedLaptop}
+                    imageURL={getProductImage(comparedLaptop)}
+                  />
+                </div>
+                <div className="min-h-0 min-w-0 flex-1">
+                  <div className="h-full w-auto p-2 sm:p-4 flex flex-col items-center justify-center rounded-2xl border border-border bg-muted/10 text-center">
+                    <p>{t("compare.selectToCompare")}</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                  {getTitle()}
+                </h1>
+                <p className="mt-2 text-sm text-muted-foreground sm:text-base">
+                  {loading
+                    ? t("search.loading")
+                    : t("search.laptopsFound", { count: laptops.length })}
+                </p>
+              </div>
+            )}
             <button
               type="button"
               onClick={() => setShowFilters((prev) => !prev)}
@@ -222,7 +277,10 @@ export function SearchContent() {
             <div className="mt-5 space-y-5">
               {/* Brand Filter */}
               <div>
-                <label htmlFor="brand-filter" className="block text-sm font-medium text-foreground mb-2">
+                <label
+                  htmlFor="brand-filter"
+                  className="block text-sm font-medium text-foreground mb-2"
+                >
                   {t("search.brand")}
                 </label>
                 <select
@@ -242,7 +300,10 @@ export function SearchContent() {
 
               {/* Category Filter */}
               <div>
-                <label htmlFor="category-filter" className="block text-sm font-medium text-foreground mb-2">
+                <label
+                  htmlFor="category-filter"
+                  className="block text-sm font-medium text-foreground mb-2"
+                >
                   {t("search.category")}
                 </label>
                 <select
@@ -278,7 +339,10 @@ export function SearchContent() {
                     step={PRICE_STEP}
                     value={Math.min(sliderMin, sliderMax)}
                     onChange={(e) => {
-                      const next = Math.min(parseInt(e.target.value, 10), sliderMax);
+                      const next = Math.min(
+                        parseInt(e.target.value, 10),
+                        sliderMax,
+                      );
                       setPriceMin(String(next));
                     }}
                     onMouseUp={applyFilters}
@@ -292,7 +356,10 @@ export function SearchContent() {
                     step={PRICE_STEP}
                     value={Math.max(sliderMin, sliderMax)}
                     onChange={(e) => {
-                      const next = Math.max(parseInt(e.target.value, 10), sliderMin);
+                      const next = Math.max(
+                        parseInt(e.target.value, 10),
+                        sliderMin,
+                      );
                       setPriceMax(String(next));
                     }}
                     onMouseUp={applyFilters}
@@ -343,14 +410,23 @@ export function SearchContent() {
 
             {loading && (
               <div className="h-full w-full flex items-center justify-center">
-                <LoadingLogo/>
+                <LoadingLogo />
               </div>
             )}
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
-              {!loading && laptops.map((laptop) => (
-                <ProductCard key={laptop.id} laptop={laptop} />
-              ))}
+              {!loading &&
+                laptops.map((laptop) => (
+                  <ProductCard
+                    key={laptop.id}
+                    laptop={laptop}
+                    customLink={
+                      compareId
+                        ? `/${locale}/compare?ids=${compareId},${laptop.id}`
+                        : undefined
+                    }
+                  />
+                ))}
             </div>
           </div>
         </div>

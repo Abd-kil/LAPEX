@@ -37,11 +37,47 @@ export interface LaptopImage {
   created_at: string;
 }
 
+interface CPU {
+  id: number;
+  cpu_name: string | null;
+  cores: number | null;
+  pcores: number | null;
+  ecores: number | null;
+  threads: number | null;
+  clock_speed_mhz: number | null;
+  turbo_speed_mhz: number | null;
+  cpu_mark: number | null;
+  thread_mark: number | null;
+  tdp_w: number | null;
+  power_performance: number | null;
+  samples: number | null;
+  test_date: Date | null;
+}
+
+interface GPU {
+  id: number;
+  gpu_name: string | null;
+  g3d_mark: number | null;
+  g2d_mark: number | null;
+  tdp_w: number | null;
+  power_performance: number | null;
+  bus_interface: string | null;
+  samples: number | null;
+  test_date: Date | null;
+  core_clock_mhz: number | null;
+  memory_clock_mhz: number | null;
+  vram_mb: number | null;
+}
+
 export interface LaptopSpec {
   id: number;
   laptop_id: number | null;
-  cpu: string | null;
-  gpu: string | null;
+  cpu_id?: number | null;
+  gpu_id?: number | null;
+  cpu: CPU | null;
+  gpu: GPU | null;
+  cpu_normalized_score?: number | null;
+  gpu_normalized_score?: number | null;
   gpu_gb: number | null;
   ram_gen: string | null;
   ram_gb: number | null;

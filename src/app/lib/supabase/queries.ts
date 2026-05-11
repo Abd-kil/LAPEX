@@ -18,6 +18,21 @@ function getSupabaseClient() {
   return supabase;
 }
 
+// get laptop by id
+export async function getLaptopById(laptopId: number): Promise<Laptop | null> {
+  const client = getSupabaseClient();
+  const { data, error } = await client
+    .from('laptops')
+    .select('*')
+    .eq('id', laptopId)
+    .single();
+  
+  if (error || !data) {
+    console.error('Error fetching laptop by ID:', error);
+    return null;
+  }
+  return data as Laptop;
+}
 /**
  * Fetch laptops with optional filters
  */
@@ -99,22 +114,47 @@ export async function getLaptopWithDetails(laptopId: number): Promise<LaptopWith
     .single();
 
   if (laptopError || !laptop) {
-    console.error('Error fetching laptop:', laptopError);
+    console.error('Error fetching laptop:', laptopError?.message);
     return null;
   }
 
   // Fetch related data in parallel
   const [specsResult, scoresResult, imagesResult, sourceResult] = await Promise.all([
-    client.from('laptop_specs').select('*').eq('laptop_id', laptopId).single(),
+    client
+      .from('laptop_specs')
+      .select('*, cpu:cpu_id(*), gpu:gpu_id(*)')
+      .eq('laptop_id', laptopId)
+      .single(),
     client.from('laptop_scores').select('*').eq('laptop_id', laptopId).single(),
     client.from('laptop_images').select('*').eq('laptop_id', laptopId).order('sort_order'),
     client.from('sources').select('*').eq('id', laptop.source_id).single(),
   ]);
 
+  const specs = specsResult.data ?? undefined;
+  let specsWithNormalized = specs;
+
+  if (specs?.cpu?.cpu_mark != null || specs?.gpu?.g3d_mark != null) {
+    const stats = await getBenchmarkStats();
+    const cpuRange = (stats.cpu_max ?? 0) - (stats.cpu_min ?? 0);
+    const gpuRange = (stats.gpu_max ?? 0) - (stats.gpu_min ?? 0);
+
+    specsWithNormalized = {
+      ...specs,
+      cpu_normalized_score:
+        specs.cpu?.cpu_mark == null || cpuRange <= 0
+          ? null
+          : ((specs.cpu.cpu_mark - (stats.cpu_min ?? 0)) / cpuRange) * 100,
+      gpu_normalized_score:
+        specs.gpu?.g3d_mark == null || gpuRange <= 0
+          ? null
+          : ((specs.gpu.g3d_mark - (stats.gpu_min ?? 0)) / gpuRange) * 100,
+    };
+  }
+
   return {
     ...laptop,
     description: cleanDescription(laptop.description),
-    specs: specsResult.data || undefined,
+    specs: specsWithNormalized,
     scores: scoresResult.data || undefined,
     images: imagesResult.data || undefined,
     source: sourceResult.data || undefined,
@@ -234,6 +274,43 @@ export async function getCategories() {
       console.error('Error fetching categories:', error);
       throw error;
     }
-    const categories = data.map((category) => ({ ...category, invertDark: true }));
+    const categories = data.map((category: Category) => ({ ...category, invertDark: true }));
     return categories as Category[];
+}
+
+async function getBenchmarkStats() {
+  const client = getSupabaseClient();
+  const { data, error } = await client
+    .from('benchmark_stats')
+    .select('cpu_min, cpu_max, gpu_min, gpu_max')
+    .eq('id', 1)
+    .single();
+
+  if (error || !data) {
+    console.error('Error fetching benchmark stats:', error);
+    throw error ?? new Error('Benchmark stats not found.');
+  }
+
+  return data as {
+    cpu_min: number | null;
+    cpu_max: number | null;
+    gpu_min: number | null;
+    gpu_max: number | null;
+  };
+}
+
+export async function normalizeCPUScore(score: number) {
+  const stats = await getBenchmarkStats();
+  const lowestScore = stats.cpu_min ?? 0;
+  const highestScore = stats.cpu_max ?? 0;
+  const range = highestScore - lowestScore;
+  return range === 0 ? 0 : ((score - lowestScore) / range) * 100;
+}
+
+export async function normalizeGPUScore(score: number) {
+  const stats = await getBenchmarkStats();
+  const lowestScore = stats.gpu_min ?? 0;
+  const highestScore = stats.gpu_max ?? 0;
+  const range = highestScore - lowestScore;
+  return range === 0 ? 0 : ((score - lowestScore) / range) * 100;
 }

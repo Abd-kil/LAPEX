@@ -12,6 +12,7 @@ import {
   removeFromFavorite,
 } from "@/app/utils/favorite";
 import Link from "next/link";
+import { ScoreCircle } from "../../ui/ScoreProgress";
 
 export function ProductDetailsContent({
   product,
@@ -19,7 +20,6 @@ export function ProductDetailsContent({
   product: LaptopWithDetails;
 }) {
   const { t } = useI18n();
-
   const sortedImages = useMemo(() => {
     if (!product.images?.length) return ["/images/vercel.svg"];
     return [...product.images]
@@ -157,22 +157,44 @@ export function ProductDetailsContent({
               </h3>
               <div className="grid gap-2 text-sm">
                 {product.specs.cpu && (
-                  <div className="flex justify-between gap-2 rounded-lg border border-border bg-muted/10 px-3 py-2">
-                    <span className="font-medium text-foreground/80">
-                      {t("specs.cpu")}
-                    </span>
-                    <span className="text-foreground">{product.specs.cpu}</span>
+                  <div className="rounded-lg border border-border bg-muted/10 px-3 py-2">
+                    <div className="flex justify-between gap-2 mb-2">
+                      <span className="font-medium text-foreground/80">
+                        {t("specs.cpu")}
+                      </span>
+                      <span className="text-foreground">
+                        {product.specs.cpu.cpu_name}
+                      </span>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                      <div
+                        className="h-full bg-primary transition-all"
+                        style={{
+                          width: `${product.specs.cpu_normalized_score}%`,
+                        }}
+                      />
+                    </div>
                   </div>
                 )}
                 {product.specs.gpu && (
-                  <div className="flex justify-between gap-2 rounded-lg border border-border bg-muted/10 px-3 py-2">
-                    <span className="font-medium text-foreground/80">
-                      {t("specs.gpu")}
-                    </span>
-                    <span className="text-foreground">
-                      {product.specs.gpu}{" "}
-                      {product.specs.gpu_gb && `${product.specs.gpu_gb} GB`}
-                    </span>
+                  <div className="rounded-lg border border-border bg-muted/10 px-3 py-2">
+                    <div className="flex justify-between gap-2 mb-2">
+                      <span className="font-medium text-foreground/80">
+                        {t("specs.gpu")}
+                      </span>
+                      <span className="text-foreground">
+                        {product.specs.gpu.gpu_name}{" "}
+                        {product.specs.gpu_gb && `${product.specs.gpu_gb} GB`}
+                      </span>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                      <div
+                        className="h-full bg-primary transition-all"
+                        style={{
+                          width: `${product.specs.gpu_normalized_score}%`,
+                        }}
+                      />
+                    </div>
                   </div>
                 )}
                 {product.specs.ram_gb && (
@@ -232,82 +254,56 @@ export function ProductDetailsContent({
 
           {/* Usage Scores */}
           {product.scores && (
-            <div className="mt-6 space-y-3">
+            <div className="grid mt-6 space-y-3">
               <h3 className="text-sm font-semibold text-foreground">
                 {t("productDetails.usageScores")}
               </h3>
-              <div className="grid gap-2 text-sm">
+              <div className="flex justify-evenly flex-wrap gap-2 text-sm">
                 {product.scores.office_score !== null && (
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-foreground/80">
-                      {t("scores.office")}
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <div className="h-2 w-32 overflow-hidden rounded-full bg-muted">
-                        <div
-                          className="h-full bg-primary transition-all"
-                          style={{ width: `${product.scores.office_score}%` }}
-                        />
+                  <div className="flex items-center min-w-3.5 gap-2">
+                    <div className="rounded-xl bg-background px-3 py-3">
+                      <p className="mb-2 truncate text-center text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        {t("scores.office")}
+                      </p>
+                      <div className="min-w-0">
+                        <ScoreCircle value={product.scores.office_score} />
                       </div>
-                      <span className="w-12 text-right font-medium text-foreground">
-                        {product.scores.office_score}
-                      </span>
                     </div>
                   </div>
                 )}
                 {product.scores.gaming_score !== null && (
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-foreground/80">
-                      {t("scores.gaming")}
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <div className="h-2 w-32 overflow-hidden rounded-full bg-muted">
-                        <div
-                          className="h-full bg-primary transition-all"
-                          style={{ width: `${product.scores.gaming_score}%` }}
-                        />
+                  <div className="flex items-center min-w-3.5 gap-2">
+                    <div className="rounded-xl bg-background px-3 py-3">
+                      <p className="mb-2 truncate text-center text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        {t("scores.gaming")}
+                      </p>
+                      <div className="min-w-0">
+                        <ScoreCircle value={product.scores.gaming_score} />
                       </div>
-                      <span className="w-12 text-right font-medium text-foreground">
-                        {product.scores.gaming_score}
-                      </span>
                     </div>
                   </div>
                 )}
                 {product.scores.editing_score !== null && (
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-foreground/80">
-                      {t("scores.editing")}
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <div className="h-2 w-32 overflow-hidden rounded-full bg-muted">
-                        <div
-                          className="h-full bg-primary transition-all"
-                          style={{ width: `${product.scores.editing_score}%` }}
-                        />
+                  <div className="flex items-center min-w-3.5 gap-2">
+                    <div className="rounded-xl bg-background px-3 py-3">
+                      <p className="mb-2 truncate text-center text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        {t("scores.editing")}
+                      </p>
+                      <div className="min-w-0">
+                        <ScoreCircle value={product.scores.editing_score} />
                       </div>
-                      <span className="w-12 text-right font-medium text-foreground">
-                        {product.scores.editing_score}
-                      </span>
                     </div>
                   </div>
                 )}
                 {product.scores.programming_score !== null && (
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-foreground/80">
-                      {t("scores.programming")}
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <div className="h-2 w-32 overflow-hidden rounded-full bg-muted">
-                        <div
-                          className="h-full bg-primary transition-all"
-                          style={{
-                            width: `${product.scores.programming_score}%`,
-                          }}
-                        />
+                  <div className="flex items-center min-w-3.5 gap-2">
+                    <div className="rounded-xl bg-background px-3 py-3">
+                      <p className="mb-2 truncate text-center text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        {t("scores.programming")}
+                      </p>
+                      <div className="min-w-0">
+                        <ScoreCircle value={product.scores.programming_score} />
                       </div>
-                      <span className="w-12 text-right font-medium text-foreground">
-                        {product.scores.programming_score}
-                      </span>
                     </div>
                   </div>
                 )}
@@ -318,7 +314,10 @@ export function ProductDetailsContent({
           <div className="my-6 border-t border-border" />
 
           <div className="flex flex-wrap items-center gap-3">
-            <Link href='/compare' className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-primary bg-background px-5 text-sm font-semibold text-primary transition hover:bg-primary/5">
+            <Link
+              href={`/search?compare=${product.id}`}
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-primary bg-background px-5 text-sm font-semibold text-primary transition hover:bg-primary/5"
+            >
               {t("productDetails.compareLaptop")}
             </Link>
             <button

@@ -1,5 +1,18 @@
 import { createClient } from '@supabase/supabase-js';
 
+// Dev-only TLS workaround for environments with HTTPS interception / missing root CAs.
+// Enable with SUPABASE_DISABLE_TLS_VERIFY=true (NEVER use in production).
+if (
+  process.env.NODE_ENV !== 'production' &&
+  process.env.SUPABASE_DISABLE_TLS_VERIFY === 'true'
+) {
+  // eslint-disable-next-line no-process-env
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+  console.warn(
+    'SUPABASE_DISABLE_TLS_VERIFY=true: TLS certificate verification is DISABLED for this dev process.'
+  );
+}
+
 // Validate environment variables
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
