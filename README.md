@@ -4,7 +4,7 @@ LAPEX is Syria's premier laptop comparison and review platform. We simplify lapt
 
 Built with **Next.js** (App Router), **TypeScript**, and **Supabase**, LAPEX delivers a multilingual, responsive experience with server routes, advanced search and filtering, and reusable UI components for product listings, details, favorites, and side-by-side comparisons.
 
-**Live demo:** https://lapex.vercel.app (deployed on Vercel as the `dev` deployment)
+**Live:** https://lapex.sy
 
 ## Key features
 
