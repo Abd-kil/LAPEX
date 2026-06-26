@@ -78,15 +78,30 @@
   },
   "contact": {
     "callUs": "Call Us",
-    "callUsText": "We're available 24 hours a day, 7 days a week!",
+    "callUsText": "You can reach us with this number",
     "writeToUs": "Write To Us",
-    "writeToUsText": "Fill out our form and we will contact you within 24 hours",
+    "writeToUsText": "Fill out our form and we will contact you as soon as possible.",
     "orSendEmail": "Or send us an email:",
     "form": {
       "name": "Your Name",
       "email": "Your Email",
       "phone": "Your Phone",
-      "message": "Your Message"
+      "message": "Your Message",
+      "sending": "Sending…",
+      "success": "Your message was sent. We will get back to you soon.",
+      "error": "Could not send your message. Please try again.",
+      "captchaRequired": "Please complete the captcha before sending.",
+      "captchaLabel": "Verification",
+      "notConfigured": "Contact form is temporarily unavailable.",
+      "requiredHint": "Fields marked with * are required.",
+      "errors": {
+        "nameRequired": "Please enter your name.",
+        "emailRequired": "Please enter your email address.",
+        "emailInvalid": "Please enter a valid email address.",
+        "phoneTooLong": "Phone number is too long.",
+        "messageRequired": "Please enter your message.",
+        "messageTooShort": "Message must be at least 10 characters."
+      }
     }
   },
   "checkout": {

@@ -1,3 +1,4 @@
+import { unstable_cache } from 'next/cache';
 import { supabase } from './client';
 import type { 
   Laptop, 
@@ -6,7 +7,8 @@ import type {
   LaptopScore,
   LaptopImage,
   Source, 
-  Category
+  Category,
+  ContactInfo
 } from '../constants/models';
 import { cleanDescription } from '@/app/utils/text';
 
@@ -314,3 +316,25 @@ export async function normalizeGPUScore(score: number) {
   const range = highestScore - lowestScore;
   return range === 0 ? 0 : ((score - lowestScore) / range) * 100;
 }
+
+async function fetchContactInfo(): Promise<ContactInfo | null> {
+  const client = getSupabaseClient();
+  const { data, error } = await client
+    .from('contact_info')
+    .select('phone, email, secondary_email, ads_email')
+    .limit(1)
+    .maybeSingle();
+
+  if (error) {
+    console.error('Error fetching contact info:', error);
+    return null;
+  }
+
+  return data as ContactInfo | null;
+}
+
+export const getContactInfo = unstable_cache(
+  fetchContactInfo,
+  ['contact-info'],
+  { revalidate: 3600, tags: ['contact-info'] }
+);

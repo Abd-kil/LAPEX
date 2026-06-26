@@ -142,3 +142,9 @@ export type Category = {
 };
 
 
+export interface ContactInfo {
+  phone?: string;
+  email?: string;
+  secondary_email?: string;
+  ads_email?: string;
+}
